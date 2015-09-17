@@ -58,6 +58,8 @@ if __name__ == "__main__":
 	dirs = os.listdir(path)
 	dirlists = len(dirs)
 	dirlists +=1
+	if dirs[0]==".DS_Store":
+		dirlists -=1
 	dirlists = path+"answers"+str(dirlists)
 	os.mkdir(dirlists)
 	print "mkdir "+dirlists
