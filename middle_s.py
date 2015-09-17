@@ -20,6 +20,8 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 	def do_GET(self):
 		logging.error(self.headers)
 		self.send_response(200)
+                self.end_headers()
+                self.wfile.write("error")
 
 	def do_POST(self):
 		global most_efficient
@@ -28,6 +30,9 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 			headers = self.headers,
 			environ = {"REQUEST_METHOD":"POST","CONTENT_TYPE":self.headers["Content-Type"],})
 		self.send_response(200)
+                self.end_headers()
+                self.wfile.write("ok")
+
 		print most_efficient["score"]
 		print form["score"].value
 
