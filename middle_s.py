@@ -89,4 +89,7 @@ if __name__ == "__main__":
 	httpd = SocketServer.TCPServer((HOST, PORT), Handler)
 
 	print "serving at port", PORT
-	httpd.serve_forever()
+	try:
+		httpd.serve_forever()
+	except KeyboardInterrupt:
+		httpd.shutdown()
