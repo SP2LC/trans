@@ -8,6 +8,9 @@ import SocketServer
 import logging
 import cgi
 
+SERVER = "http://sp2lc.salesio-sp.ac.jp/procon26-test/procon.php"
+TOKEN = "Salesio"
+
 most_efficient = {"problem_id":0,"answer_string":"aaa","score":9999999,"time":0,"version":"xxx","used_pieces":256}
 
 class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -40,8 +43,11 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 		print form["used_pieces"].value
 
 		if most_efficient["score"] > int(form["score"].value):
-			requests.post("http://sp2lc.salesio-sp.ac.jp/procon26-test/procon.php",
-				data = {"problem_id":form["problem_id"].value,"answer_string":form["answer_string"].value,"score":form["score"].value,"time":form["time"].value,"version":form["version"].value,"used_pieces":form["used_pieces"].value})
+			# requests.post("http://sp2lc.salesio-sp.ac.jp/procon26-test/procon.php",
+			# 	data = {"problem_id":form["problem_id"].value,"answer_string":form["answer_string"].value,"score":form["score"].value,"time":form["time"].value,"version":form["version"].value,"used_pieces":form["used_pieces"].value})
+                        requests.post(SERVER, data={
+                            "token": TOKEN,
+                            "answer": form["answer_string"].value})
 			most_efficient = {"problem_id":int(form["problem_id"].value),"answer_string":form["answer_string"].value,"score":int(form["score"].value),"time":int(form["time"].value),"version":form["version"].value,"used_pieces":int(form["used_pieces"].value)}
 			print most_efficient
 			strs = form["answer_string"].value
