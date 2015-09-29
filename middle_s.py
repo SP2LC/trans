@@ -82,9 +82,9 @@ if __name__ == "__main__":
 	path = "Dirs/"
 	dirs = os.listdir(path)
 	dirlists = len(dirs)
-	dirlists +=1
-	if dirs[0]==".DS_Store":
+	if dirlists == 1:
 		dirlists -=1
+	dirlists +=1
 	dirlists = path+"answers"+str(dirlists)
 	os.mkdir(dirlists)
 	print "mkdir "+dirlists
@@ -95,7 +95,7 @@ if __name__ == "__main__":
 	httpd = SocketServer.TCPServer((HOST, PORT), Handler)
 
 	print "serving at port", PORT
-        try:
-	    httpd.serve_forever()
-        except KeyboardInterrupt:
-            httpd.shutdown()
+	try:
+		httpd.serve_forever()
+	except KeyboardInterrupt:
+		httpd.shutdown()
