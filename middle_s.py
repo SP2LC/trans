@@ -65,6 +65,7 @@ class ServerHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 				files = {'answer': ('answer.txt', open(dirlists+"/"+"answer"+str(filelists)+".txt", 'rb'))}
 				r = requests.post(SERVER, data={"token": TOKEN,},files = files)
 				print r.text
+                print (most_efficient["score"], most_efficient["used_pieces"])
 
 if __name__ == "__main__":
 
